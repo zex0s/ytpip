@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name         PiPifier
-// @namespace    https://github.com/user/pipifier
+// @name         ytpip
+// @namespace    https://github.com/user/zex0s
 // @version      1.0.0
 // @description  Enable Picture-in-Picture mode for YouTube videos
 // @match        *://*.youtube.com/*
@@ -54,7 +54,7 @@
 
   function shouldAddButton() {
     return (
-      document.querySelector(".ytp-right-controls-left") !== null &&
+      document.querySelector(".ytp-right-controls") !== null &&
       document.querySelector(".PiPifierButton") === null
     );
   }
@@ -62,7 +62,7 @@
   function addYouTubeButton() {
     if (!shouldAddButton()) return;
 
-    const controls = document.querySelector(".ytp-right-controls-left");
+    const controls = document.querySelector(".ytp-right-controls");
     if (!controls) return;
 
     const button = document.createElement("button");
@@ -73,7 +73,7 @@
       "width: 48px; height: 100%; padding: 0; opacity: 0.9; display: flex; align-items: center; justify-content: center;";
     button.addEventListener("click", togglePiP);
 
-    controls.prepend(button);
+    controls.insertBefore(button, controls.querySelector(".ytp-right-controls-right"));
   }
 
   function init() {
